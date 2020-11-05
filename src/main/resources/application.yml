@@ -1,0 +1,38 @@
+spring:
+  profiles:
+    active: ${car.project.profile:beta}
+  main:
+    allow-bean-definition-overriding: true
+  redis:
+    host: ${foodtrip.redis.host:localhost}
+    port: ${foodtrip.redis.port:6379}
+    database: ${foodtrip.redis.database:0}
+
+logging.level.org.springframework.web: DEBUG
+
+---
+spring:
+  profiles: local
+  datasource:
+    url: jdbc:h2:mem:junit;MODE=MYSQL;DATABASE_TO_UPPER=false
+    data: classpath:schema.sql
+    driver-class-name: org.h2.Driver
+    data-username: sa
+    password:
+    initialization-mode: always
+
+---
+
+spring:
+  profiles: dev
+
+---
+
+spring:
+  profiles: prod
+  datasource:
+    url: ${foodtrip.datasource.url}
+    username: ${foodtrip.datasource.username}
+    password: ${foodtrip.datasource.password}
+
+logging.level.org.springframework.web: INFO
