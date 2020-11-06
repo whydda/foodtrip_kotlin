@@ -15,11 +15,12 @@ spring:
   profiles: local
   datasource:
     url: jdbc:h2:mem:junit;MODE=MYSQL;DATABASE_TO_UPPER=false
-    data: classpath:schema.sql
     driver-class-name: org.h2.Driver
     data-username: sa
     password:
     initialization-mode: always
+    data: classpath:data.sql
+    schema: classpath:schema.sql
 
 ---
 
